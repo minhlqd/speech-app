@@ -1,4 +1,4 @@
-package com.example.speechpj;
+package com.example.speechpj.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -10,34 +10,32 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.media.MediaPlayer;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.speechpj.R;
+import com.example.speechpj.adapter.AudioListAdapter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 
 @SuppressWarnings("ALL")
 public class AudioListFragment extends Fragment implements AudioListAdapter.onItemListClick {
 
+    private static final int REQUEST_AUDIO = 2;
     private BottomSheetBehavior bottomSheetBehavior;
 
     private RecyclerView audioList;
@@ -144,6 +142,13 @@ public class AudioListFragment extends Fragment implements AudioListAdapter.onIt
 
     @Override
     public void onClickListener(File file, int position) {
+//        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+//                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+//        startActivityForResult(galleryIntent, REQUEST_AUDIO);
+
+        if (position % 2 == 1 ) {
+            Toast.makeText(getContext(), "Mai Xuan Minh", Toast.LENGTH_SHORT).show();
+        }
         fileToPlay = file;
         if (isPlaying) {
             stopAudio();
@@ -172,7 +177,7 @@ public class AudioListFragment extends Fragment implements AudioListAdapter.onIt
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     private void stopAudio() {
-        //Stop The Audio
+
         playBtn.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.player_play_btn, null));
         playerHeader.setText("Stopped");
         isPlaying = false;
@@ -222,6 +227,12 @@ public class AudioListFragment extends Fragment implements AudioListAdapter.onIt
             }
         };
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 2 && resultCode == RESULT_OK && null != data)
+//    }
 
     @Override
     public void onStop() {

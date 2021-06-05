@@ -1,4 +1,4 @@
-package com.example.speechpj;
+package com.example.speechpj.uis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+
+import com.example.speechpj.R;
 
 import java.util.Locale;
 

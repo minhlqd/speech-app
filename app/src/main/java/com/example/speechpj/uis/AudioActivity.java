@@ -1,8 +1,10 @@
-package com.example.speechpj;
+package com.example.speechpj.uis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.speechpj.R;
 
 public class AudioActivity extends AppCompatActivity {
 

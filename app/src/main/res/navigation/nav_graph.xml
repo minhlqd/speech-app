@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/recordFragment"
-        android:name="com.example.speechpj.RecordFragment"
+        android:name="com.example.speechpj.fragments.RecordFragment"
         android:label="fragment_record"
         tools:layout="@layout/fragment_record" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/audioListFragment"
-        android:name="com.example.speechpj.AudioListFragment"
+        android:name="com.example.speechpj.fragments.AudioListFragment"
         android:label="fragment_audio_list"
         tools:layout="@layout/fragment_audio_list" />
 </navigation>

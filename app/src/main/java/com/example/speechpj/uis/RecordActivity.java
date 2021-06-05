@@ -1,4 +1,4 @@
-package com.example.speechpj;
+package com.example.speechpj.uis;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.speechpj.R;
 
 import java.util.ArrayList;
 import java.util.Locale;

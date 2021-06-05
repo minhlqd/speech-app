@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AudioListFragment"
-    android:background="@android:color/white"
-    >
+    tools:context=".fragments.AudioListFragment"
+    android:background="@android:color/white">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/audio_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp"/>
     <include layout="@layout/player_sheet" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

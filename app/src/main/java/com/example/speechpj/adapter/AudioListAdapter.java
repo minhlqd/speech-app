@@ -1,4 +1,4 @@
-package com.example.speechpj;
+package com.example.speechpj.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.speechpj.R;
+import com.example.speechpj.TimeAgo;
 
 import java.io.File;
 

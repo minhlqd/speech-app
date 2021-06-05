@@ -1,4 +1,4 @@
-package com.example.speechpj;
+package com.example.speechpj.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -25,6 +25,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.speechpj.R;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -103,9 +105,9 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
 
             case R.id.record_btn:
                 if(isRecording) {
-                    //Stop Recording
+
                     stopRecording();
-                    // Change button image and set Recording state to false
+
                     recordBtn.setImageDrawable(getResources().getDrawable(R.drawable.record_btn_stopped, null));
                     isRecording = false;
                 } else {
@@ -114,7 +116,7 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
                         //Start Recording
                         startRecording();
 
-                        // Change button image and set Recording state to false
+
                         recordBtn.setImageDrawable(getResources().getDrawable(R.drawable.record_btn_recording, null));
                         isRecording = true;
                     }
@@ -125,13 +127,13 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     private void stopRecording() {
-        //Stop Timer, very obvious
+
         timer.stop();
 
-        //Change text on page to file saved
+
         filenameText.setText("Recording Stopped, File Saved : " + recordFile);
 
-        //Stop media recorder and set it to null for further use to record new audio
+
         mediaRecorder.stop();
         mediaRecorder.release();
         mediaRecorder = null;
@@ -139,23 +141,23 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     private void startRecording() {
-        //Start timer from 0
+
         timer.setBase(SystemClock.elapsedRealtime());
         timer.start();
 
-        //Get app external directory path
-        String recordPath = Objects.requireNonNull(getActivity()).getExternalFilesDir("/").getAbsolutePath();
 
-        //Get current date and time
+        String recordPath = getActivity().getExternalFilesDir("/").getAbsolutePath();
+
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.CHINA);
         Date now = new Date();
 
-        //initialize filename variable with date and time at the end to ensure the new file wont overwrite previous file
+
         recordFile = "Recording_" + formatter.format(now) + ".wav";
 
         filenameText.setText("Recording, File Name : " + recordFile);
 
-        //Setup Media Recorder for recording
+
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -173,13 +175,11 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
     }
 
     private boolean checkPermissions() {
-        //Check permission
-        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), recordPermission) == PackageManager.PERMISSION_GRANTED) {
-            //Permission Granted
+        if (ActivityCompat.checkSelfPermission(getContext(), recordPermission) == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
-            //Permission not granted, ask for permission
-            ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{recordPermission}, PERMISSION_CODE);
+
+            ActivityCompat.requestPermissions(getActivity(), new String[]{recordPermission}, PERMISSION_CODE);
             return false;
         }
     }

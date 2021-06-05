@@ -12,10 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeechPJ">
-        <activity android:name=".TextActivity"></activity>
-        <activity android:name=".RecordActivity" />
-        <activity android:name=".AudioActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".uis.TextActivity"></activity>
+        <activity android:name=".uis.RecordActivity" />
+        <activity android:name=".uis.AudioActivity" />
+        <activity android:name=".uis.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

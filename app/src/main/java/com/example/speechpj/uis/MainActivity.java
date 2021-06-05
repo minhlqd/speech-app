@@ -1,10 +1,12 @@
-package com.example.speechpj;
+package com.example.speechpj.uis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.speechpj.R;
 
 public class MainActivity extends AppCompatActivity {
 
