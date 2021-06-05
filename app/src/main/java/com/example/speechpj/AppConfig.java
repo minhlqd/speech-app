@@ -5,12 +5,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppConfig {
 
-    private static String BASE_URL = "http://android.cseiiuc.cf/";
-
-    static Retrofit getRetrofit() {
-
+    public static Retrofit getRetrofit() {
+        String BASE_URL = "https://192.168.100.5";
         return new Retrofit.Builder()
-                .baseUrl(AppConfig.BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

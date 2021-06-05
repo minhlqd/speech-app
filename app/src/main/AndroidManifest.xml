@@ -6,13 +6,14 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeechPJ">
-        <activity android:name=".uis.TextActivity"></activity>
+        <activity android:name=".uis.TextActivity" />
         <activity android:name=".uis.RecordActivity" />
         <activity android:name=".uis.AudioActivity" />
         <activity android:name=".uis.MainActivity">

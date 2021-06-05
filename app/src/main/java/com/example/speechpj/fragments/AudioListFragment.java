@@ -1,6 +1,7 @@
 package com.example.speechpj.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,16 +25,28 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.speechpj.ApiConfig;
+import com.example.speechpj.AppConfig;
 import com.example.speechpj.R;
+import com.example.speechpj.ServerResponse;
 import com.example.speechpj.adapter.AudioListAdapter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.io.File;
 import java.io.IOException;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 @SuppressWarnings("ALL")
 public class AudioListFragment extends Fragment implements AudioListAdapter.onItemListClick {
+
+    ApiConfig apiConfig;
 
     private static final int REQUEST_AUDIO = 2;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -73,6 +86,7 @@ public class AudioListFragment extends Fragment implements AudioListAdapter.onIt
         super.onViewCreated(view, savedInstanceState);
 
         ConstraintLayout playerSheet = view.findViewById(R.id.player_sheet);
+
         bottomSheetBehavior = BottomSheetBehavior.from(playerSheet);
         audioList = view.findViewById(R.id.audio_list_view);
 
@@ -146,10 +160,33 @@ public class AudioListFragment extends Fragment implements AudioListAdapter.onIt
 //                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
 //        startActivityForResult(galleryIntent, REQUEST_AUDIO);
 
-        if (position % 2 == 1 ) {
-            Toast.makeText(getContext(), "Mai Xuan Minh", Toast.LENGTH_SHORT).show();
-        }
+
+//        if (position % 2 == 1 ) {
+//            Toast.makeText(getContext(), "Mai Xuan Minh", Toast.LENGTH_SHORT).show();
+//        }
         fileToPlay = file;
+
+        apiConfig = AppConfig.getRetrofit().create(ApiConfig.class);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/from-data"),fileToPlay);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("audio-file", file.getName(), requestBody);
+
+        Call<ServerResponse> call = apiConfig.uploadMulFile(body);
+        call.enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                ServerResponse serverResponse = response.body();
+                Toast.makeText(getContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Log.d("aaa",t.getMessage().toString());
+                call.cancel();
+            }
+        });
+
+
         if (isPlaying) {
             stopAudio();
         }
