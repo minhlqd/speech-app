@@ -3,7 +3,7 @@ package com.example.speechpj;
 import com.google.gson.annotations.SerializedName;
 
 public class ServerResponse {
-    // variable name should be same as in the json response from php
+    
     @SerializedName("success")
     boolean success;
     @SerializedName("message")

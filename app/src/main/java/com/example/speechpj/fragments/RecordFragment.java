@@ -38,6 +38,7 @@ import java.util.Objects;
 public class RecordFragment extends Fragment implements View.OnClickListener {
 
     private NavController navController;
+    int Code = 1;
 
     private ImageButton listBtn;
     private ImageButton recordBtn;
@@ -107,15 +108,11 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
                 if(isRecording) {
 
                     stopRecording();
-
                     recordBtn.setImageDrawable(getResources().getDrawable(R.drawable.record_btn_stopped, null));
                     isRecording = false;
                 } else {
-                    //Check permission to record audio
                     if(checkPermissions()) {
-                        //Start Recording
                         startRecording();
-
 
                         recordBtn.setImageDrawable(getResources().getDrawable(R.drawable.record_btn_recording, null));
                         isRecording = true;
@@ -130,9 +127,7 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
 
         timer.stop();
 
-
         filenameText.setText("Recording Stopped, File Saved : " + recordFile);
-
 
         mediaRecorder.stop();
         mediaRecorder.release();
@@ -152,7 +147,6 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.CHINA);
         Date now = new Date();
 
-
         recordFile = "Recording_" + formatter.format(now) + ".wav";
 
         filenameText.setText("Recording, File Name : " + recordFile);
@@ -170,7 +164,6 @@ public class RecordFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
-        //Start Recording
         mediaRecorder.start();
     }
 

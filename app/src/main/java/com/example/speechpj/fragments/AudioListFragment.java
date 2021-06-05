@@ -41,6 +41,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 @SuppressWarnings("ALL")
@@ -161,22 +162,23 @@ public class AudioListFragment extends Fragment implements AudioListAdapter.onIt
 //        startActivityForResult(galleryIntent, REQUEST_AUDIO);
 
 
-//        if (position % 2 == 1 ) {
-//            Toast.makeText(getContext(), "Mai Xuan Minh", Toast.LENGTH_SHORT).show();
-//        }
         fileToPlay = file;
 
-        apiConfig = AppConfig.getRetrofit().create(ApiConfig.class);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/from-data"),fileToPlay);
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("audio-file", file.getName(), requestBody);
+        Retrofit retrofit = AppConfig.getRetrofit();
 
+        apiConfig = retrofit.create(ApiConfig.class);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/from-data"),file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("upload_file", file.getName(), requestBody);
+
+        Log.d("aaa", apiConfig.toString());
         Call<ServerResponse> call = apiConfig.uploadMulFile(body);
         call.enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 ServerResponse serverResponse = response.body();
-                Toast.makeText(getContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("aaa", "successful");
+//                Toast.makeText(getContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
